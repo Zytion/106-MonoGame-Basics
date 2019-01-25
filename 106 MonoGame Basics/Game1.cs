@@ -11,6 +11,8 @@ namespace _106_MonoGame_Basics
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D image;
+        Vector2 textureLocation = new Vector2(0,-1000);
 
         public Game1()
         {
@@ -41,6 +43,7 @@ namespace _106_MonoGame_Basics
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            image = Content.Load<Texture2D>("maxresdefault");
         }
 
         /// <summary>
@@ -63,6 +66,7 @@ namespace _106_MonoGame_Basics
                 Exit();
 
             // TODO: Add your update logic here
+            textureLocation += new Vector2(0, 10);
 
             base.Update(gameTime);
         }
@@ -73,9 +77,18 @@ namespace _106_MonoGame_Basics
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
+
+            spriteBatch.Begin();
+
+            spriteBatch.Draw(
+                image,
+                textureLocation,
+                Color.White);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
