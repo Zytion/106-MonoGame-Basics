@@ -12,7 +12,8 @@ namespace _106_MonoGame_Basics
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D image;
-        Vector2 textureLocation = new Vector2(0,-1000);
+        Vector2 textureLocation = new Vector2(0,0);
+        private SpriteFont aria;
 
         public Game1()
         {
@@ -44,6 +45,8 @@ namespace _106_MonoGame_Basics
 
             // TODO: use this.Content to load your game content here
             image = Content.Load<Texture2D>("maxresdefault");
+
+            aria = Content.Load<SpriteFont>("MyNewFont");
         }
 
         /// <summary>
@@ -66,7 +69,7 @@ namespace _106_MonoGame_Basics
                 Exit();
 
             // TODO: Add your update logic here
-            textureLocation += new Vector2(0, 10);
+            ProcessInput();
 
             base.Update(gameTime);
         }
@@ -82,15 +85,41 @@ namespace _106_MonoGame_Basics
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
-
+            
             spriteBatch.Draw(
                 image,
-                textureLocation,
+                new Rectangle(textureLocation.ToPoint(), new Point(256, 144)),
                 Color.White);
+
+            spriteBatch.DrawString(aria, "Hello There", textureLocation + new Vector2(64,0), Color.White);
+            spriteBatch.DrawString(aria, "X: " + textureLocation.X + "\nY: " + textureLocation.Y, Vector2.Zero, Color.CornflowerBlue);
 
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void ProcessInput()
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+
+            if(keyboardState.IsKeyDown(Keys.W))
+            {
+                textureLocation += new Vector2(0, -2);
+
+            }
+            if (keyboardState.IsKeyDown(Keys.A))
+            {
+                textureLocation += new Vector2(-2, 0);
+            }
+            if (keyboardState.IsKeyDown(Keys.S))
+            {
+                textureLocation += new Vector2(0, 2);
+            }
+            if (keyboardState.IsKeyDown(Keys.D))
+            {
+                textureLocation += new Vector2(2, 0);
+            }
         }
     }
 }
