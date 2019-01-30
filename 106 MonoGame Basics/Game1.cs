@@ -14,6 +14,7 @@ namespace _106_MonoGame_Basics
         Texture2D image;
         Vector2 textureLocation = new Vector2(0,0);
         private SpriteFont aria;
+		Button button;
 
         public Game1()
         {
@@ -47,6 +48,8 @@ namespace _106_MonoGame_Basics
             image = Content.Load<Texture2D>("maxresdefault");
 
             aria = Content.Load<SpriteFont>("MyNewFont");
+
+			button = new Button(Content, new Rectangle(100,100, 150, 100));
         }
 
         /// <summary>
@@ -93,6 +96,8 @@ namespace _106_MonoGame_Basics
 
             spriteBatch.DrawString(aria, "Hello There", textureLocation + new Vector2(64,0), Color.White);
             spriteBatch.DrawString(aria, "X: " + textureLocation.X + "\nY: " + textureLocation.Y, Vector2.Zero, Color.CornflowerBlue);
+
+			button.Draw(spriteBatch);
 
             spriteBatch.End();
 
